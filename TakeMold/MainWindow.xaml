@@ -1,0 +1,94 @@
+﻿<Window x:Class="TakeMold.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TakeMold"
+        mc:Ignorable="d"
+        Title="FlileToArray" Height="450" Width="800" 
+        MaxHeight="450"  MaxWidth="800" 
+        MinHeight="450"  MinWidth="800"
+        DragEnter="Window_DragEnter" Drop="Window_Drop" AllowDrop="True" Closed="Window_Closed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <TreeView x:Name="File_Tree_TV" Grid.Row="0" Grid.Column="0" Height="330" VerticalAlignment="Top" >
+            <TreeView.ContextMenu>
+                <ContextMenu x:Name="TreeViewMenu" >
+                    <MenuItem x:Name="Delete" Header="删除" Click="Delete_Click"/>
+                    <MenuItem x:Name="Clear" Header="清空" Click="Clear_Click"/>
+                </ContextMenu>
+            </TreeView.ContextMenu>
+        </TreeView>
+        <Label Content="名称：" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="40" Margin="10,0,10,10"></Label>
+        <TextBox x:Name="Build_Name_TBX" Text="Resource" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="180" Margin="10,0,10,15"></TextBox>
+        <Button x:Name="Build_Btn" Grid.Column="0" Grid.Row="1" Margin="10,10,10,10" Click="Build_Btn_Click" >生成</Button>
+        <Label Content="保存路径:" Grid.Column="1" Grid.Row="1" Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        <ComboBox x:Name="Path_CBX" Grid.Column="1" Grid.Row="1" Width="350" HorizontalAlignment="Center" Margin="10,10,10,10"/>
+        <Button x:Name="Browse_Btn"  Grid.Column="1" Grid.Row="1" Width="50" HorizontalAlignment="Right" Margin="10,10,10,10" Click="Browse_Btn_Click">浏览</Button>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="FilePath_LB" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8" Content="文件路径：" VerticalAlignment="Center" Margin="10,0,10,0"/>
+            <Label x:Name="Name_LB" Grid.Row="1" Grid.Column="0" Content="名称："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="Name_TB" Grid.Row="1" Grid.Column="0"  Margin="10,2,10,2" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label x:Name="FileSize_LB" Grid.Row="1" Grid.Column="1" Content="文件大小：" VerticalAlignment="Center" Margin="10,0,10,0"/>
+            <Label x:Name="FileType_LB" Grid.Row="1" Grid.Column="2" Content="文件类型：" VerticalAlignment="Center" Margin="10,0,10,0"/>
+            <Label x:Name="SizeRatio_LB" Grid.Row="2" Grid.Column="0" Content="预设配置："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="SizeRatio_CB" Grid.Row="2" Grid.Column="0"  Margin="10,2,10,2" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" SelectionChanged="SizeRatio_CB_SelectionChanged"/>
+            <Label x:Name="RawWidth_LB" Grid.Row="2" Grid.Column="1" Content="原始宽度：" VerticalAlignment="Center" Margin="10,0,10,0"/>
+            <Label x:Name="RawHeight_LB" Grid.Row="2" Grid.Column="2" Content="原始高度：" VerticalAlignment="Center" Margin="10,0,10,0"/>
+            <Label x:Name="Ratio_LB" Grid.Row="3" Grid.Column="0" Content="联动比例："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <CheckBox x:Name="Ratio_CB" Grid.Row="3" Grid.Column="0"  Margin="10,2,10,2" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Ratio_CB_Click"/>
+            <Label x:Name="Width_LB"  Grid.Row="3" Grid.Column="1" Content="图像宽度："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="Width_TB" Grid.Row="3" Grid.Column="1"  Margin="76,5,0,0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged"/>
+            <Label x:Name="Height_LB" Grid.Row="3" Grid.Column="2" Content="图像高度："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="Height_TB" Grid.Row="3" Grid.Column="2"  Margin="10,2,10,2" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged"/>
+
+            <Label x:Name="IsStretch_LB" Grid.Row="4" Grid.Column="0" Content="是否拉伸："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <CheckBox x:Name="IsStretch_CB" Grid.Row="4" Grid.Column="0"  Margin="10,2,10,2" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" Click="IsStretch_CB_Click"/>
+
+            <Label x:Name="BackGround_LB" Grid.Row="4" Grid.Column="1" Content="背景色："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="BackGround_CB" Grid.Row="4" Grid.Column="1"  Margin="10,2,10,2" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" SelectionChanged="BackGround_CB_SelectionChanged" />
+
+            <Label x:Name="OutPutType_LB" Grid.Row="4" Grid.Column="2" Content="输出格式："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="OutPutType_CB" Grid.Row="4" Grid.Column="2"  Margin="10,2,10,2" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" SelectionChanged="OutPutType_CB_SelectionChanged" Loaded="OutPutType_CB_Loaded"  />
+
+            <Label x:Name="ConfigName_LB" Grid.Row="5" Grid.Column="2" Content="配置名:" HorizontalAlignment="Left" Margin="10,1,5,2" ></Label>
+            <TextBox x:Name="ConfigName_TB" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" Margin="12,2,0,5" Width="80"></TextBox>
+            <Button x:Name="ConfigSave_BTN" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right" Content="保存" Margin="2,2,10,5" Click="ConfigSave_BTN_Click"></Button>
+
+            <Label x:Name="Frame_Rate_LB" Grid.Row="6" Grid.Column="0" Content="GIF帧率："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor=""/>
+            <Label x:Name="Frames_LB" Grid.Row="6" Grid.Column="1" Content="GIF帧数："  Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+            <Label x:Name="Exegesis_LB" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Content="注释：" HorizontalAlignment="Left"></Label>
+            <TextBox x:Name="Exegesis_TB" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right" Width="490" Margin="10,2,10,5" AcceptsReturn="True" TextChanged="Exegesis_TB_TextChanged" />
+
+            <Label x:Name="Modifier_LB" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" Content="修饰符：" HorizontalAlignment="Left"></Label>
+            <TextBox x:Name="Modifier_TB" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right" Width="490" Margin="10,2,10,5" TextChanged="Modifier_TB_TextChanged" ></TextBox>
+
+        </Grid>
+    </Grid>
+</Window>
