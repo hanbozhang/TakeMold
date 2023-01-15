@@ -5,7 +5,8 @@
 ### WEB文件与ICO文件
     WEB文件直接通过文件流转换HEX数组的方式不提供代码压缩功能。
 
-![](IMG/1.PNG)
+![](IMG/1.PNG)  
+
 结果示例
 ```C
 #ifndef RESOURCE_H
@@ -32,6 +33,7 @@ static const char INDEX_HTML_Hex[INDEX_HTML_Hex_Len]={
 ### 图片文件
     JPG\PNG\BMP文件可提供尺寸压缩，以及空白尺寸的填充或拉伸
 ![](IMG/2.PNG)
+
 结果示例
 ```C
 #ifndef RESOURCE_H
@@ -52,6 +54,7 @@ static const char JPG_TEST_1_PNG_Hex[JPG_TEST_1_PNG_Hex_Len]={
     GIF文件可提供尺寸压缩，以及空白尺寸的填充或拉伸
     生成的代码包括GIF间隔时间 GIF帧数 GIF数组获取函数 GIF长度获取函数
 ![](IMG/2.PNG)
+
 结果示例
 ```C
 #ifndef RESOURCE_H
